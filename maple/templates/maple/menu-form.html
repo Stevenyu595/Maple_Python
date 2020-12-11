@@ -1,0 +1,9 @@
+{% extends 'maple/base.html' %}
+
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

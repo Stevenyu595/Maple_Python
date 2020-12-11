@@ -1,0 +1,74 @@
+{% extends 'maple/base.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+<h1>Chicken</h1>
+{% for chicken_item in chicken_object %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+        <a href="{% url 'maple:chicken_detail' chicken_item.id %}">
+      <img class="card" height="150px" src="../../../../pictures/{{ chicken_item.image }}"/></a>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-8 col-sm-2">
+            <h3>{{ chicken_item.name }}</h3>
+        </div>
+        <div class="col-4 col-sm-6">
+          <h5>{{ chicken_item.description }}</h5>
+        </div>
+          <div class="col-8 col-sm-4">
+            <h6>Large ${{ chicken_item.large }} Regular ${{ chicken_item.regular }}</h6>
+        </div>
+          <div class="col-md-2">
+            {% if user.is_authenticated %}
+                <a href="{% url 'maple:update_chicken' chicken_item.id %}" class="btn btn-primary">Edit</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<h1>Beef</h1>
+{% for beef_item in beef_object %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+        <a href="{% url 'maple:beef_detail' beef_item.id %}">
+      <img class="card" height="150px" src="../../../../pictures/{{ beef_item.image }}"/></a>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-8 col-sm-2">
+            <h3>{{ beef_item.name }}</h3>
+        </div>
+        <div class="col-4 col-sm-6">
+          <h5>{{ beef_item.description }}</h5>
+        </div>
+          <div class="col-8 col-sm-4">
+            <h6>Large ${{ beef_item.large }} Regular ${{ beef_item.regular }}</h6>
+        </div>
+          <div class="col-md-2">
+            {% if user.is_authenticated %}
+                <a href="{% url 'maple:update_beef' beef_item.id %}" class="btn btn-primary">Edit</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+</body>
+</html>

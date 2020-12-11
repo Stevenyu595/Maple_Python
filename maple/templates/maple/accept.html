@@ -1,0 +1,54 @@
+{% extends 'maple/base.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <form method="POST">
+                {% csrf_token %}
+            <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="">School</label>
+                <input type="text" class="form-control" id="school" name="school">
+            </div>
+            <div class="form-group">
+                <label for="">References</label>
+                <input type="text" class="form-control" id="references" name="references">
+            </div>
+            <div class="form-group">
+                <label for="">Previous Work</label>
+                <textarea class="form-control" id="previous_work" name="previous_work"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="">Job Position</label>
+                <textarea class="form-control" id="job_position" name="job_position"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

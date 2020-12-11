@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'maple/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar">
+    <a href="{% url 'maple:index' %}" class="navbar-brand">Maple Express</a>
+    <div class="navbar">
+        <a href="{% url 'maple:index' %}" class="nav-item nav-link">Home</a>
+        <a href="{% url 'maple:menu_list' %}" class="nav-item nav-link">Menu</a>
+        <a href="{% url 'maple:accept' %}" class="nav-item nav-link">Apply</a>
+    </div>
+    <div class="navbar">
+        {% if user.is_authenticated %}
+            <a href="{% url 'maple:create_item' %}" class="nav-item nav-link">Add Item</a>
+            <a href="{% url 'maple:create_chicken' %}" class="nav-item nav-link">Add Chicken</a>
+            <a href="{% url 'maple:create_beef' %}" class="nav-item nav-link">Add Beef</a>
+            <a href="{%  url 'profile' %}" class="nav-item nav-link">Profile</a>
+            <a href="{%  url 'logout' %}" class="nav-item nav-link">Logout</a>
+        {% else %}
+            <a href="{%  url 'login' %}" class="nav-item nav-link">Login</a>
+        {% endif %}
+    </div>
+</nav>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% block body %}
+{% endblock %}
+</body>
+</html>
