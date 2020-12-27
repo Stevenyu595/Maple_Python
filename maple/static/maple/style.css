@@ -1,9 +1,11 @@
+@import "~bootstrap/scss/bootstrap";
+
 .container {
-    border-style: ridge;
+    border-style: none;
 }
 
 body {
-    background-color: lightyellow;
+    background: #FFFFE0 !important;
 }
 
 h1 {
