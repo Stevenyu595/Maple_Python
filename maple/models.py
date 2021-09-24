@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Side(models.Model):
+    def __str__(self):
+        return self.name
+
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
+    large = models.DecimalField(decimal_places=2, max_digits=4)
+    regular = models.DecimalField(decimal_places=2, max_digits=4)
+    image = models.ImageField(upload_to='images', default="https://www.takeoutlist.com/assets/images/food_default.png")
 
 class Menu(models.Model):
     def __str__(self):
@@ -9,8 +18,9 @@ class Menu(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    large = models.IntegerField()
-    regular = models.IntegerField()
+    one = models.DecimalField(decimal_places=2, max_digits=4)
+    three = models.DecimalField(decimal_places=2, max_digits=4)
+    six = models.DecimalField(decimal_places=2, max_digits=4)
     image = models.ImageField(upload_to='images', default="https://www.takeoutlist.com/assets/images/food_default.png")
     # image = models.ImageField(upload_to='images', default='images/none/sz.jpg')
 
@@ -20,8 +30,8 @@ class Chicken(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    large = models.IntegerField()
-    regular = models.IntegerField()
+    large = models.DecimalField(decimal_places=2, max_digits=4)
+    regular = models.DecimalField(decimal_places=2, max_digits=4)
     image = models.ImageField(upload_to='images', default="https://www.takeoutlist.com/assets/images/food_default.png")
 
 class Beef(models.Model):
@@ -30,8 +40,8 @@ class Beef(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    large = models.IntegerField()
-    regular = models.IntegerField()
+    large = models.DecimalField(decimal_places=2, max_digits=4)
+    regular = models.DecimalField(decimal_places=2, max_digits=4)
     image = models.ImageField(upload_to='images', default="https://www.takeoutlist.com/assets/images/food_default.png")
 
 class Application(models.Model):

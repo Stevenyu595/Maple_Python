@@ -1,4 +1,5 @@
 {% extends 'maple/base.html' %}
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,12 +8,50 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'maple/style.css' %}">
 </head>
 <body>
 {% block body %}
-<h1>Chicken</h1>
-{% for chicken_item in chicken_object %}
+
 <div class="container">
+  <h1>Sides</h1>
+{% for side_item in side_object %}
+<div class="container1">
+  <div class="row">
+    <div class="col-sm-3">
+        <a href="{% url 'maple:side_detail' side_item.id %}">
+      <img class="card" height="150px" src="../../../../pictures/{{ side_item.image }}"/></a>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-8 col-sm-2">
+            <h3>{{ side_item.name }}</h3>
+        </div>
+        <div class="col-4 col-sm-6">
+          <h5>{{ side_item.description }}</h5>
+        </div>
+          <div class="col-8 col-sm-4">
+            <h6>Large ${{ side_item.large }} Regular ${{ side_item.regular }}</h6>
+        </div>
+          <div class="col-md-2">
+            {% if user.is_authenticated %}
+                <a href="{% url 'maple:update_side' side_item.id %}" class="btn btn-primary">Edit</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+<div class="container">
+  <h1>Chicken</h1>
+{% for chicken_item in chicken_object %}
+<div class="container1">
   <div class="row">
     <div class="col-sm-3">
         <a href="{% url 'maple:chicken_detail' chicken_item.id %}">
@@ -39,9 +78,12 @@
   </div>
 </div>
 {% endfor %}
-<h1>Beef</h1>
-{% for beef_item in beef_object %}
+  </div>
+
 <div class="container">
+  <h1>Beef</h1>
+{% for beef_item in beef_object %}
+<div class="container1">
   <div class="row">
     <div class="col-sm-3">
         <a href="{% url 'maple:beef_detail' beef_item.id %}">
@@ -68,7 +110,10 @@
   </div>
 </div>
 {% endfor %}
-
+</div>
 {% endblock %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

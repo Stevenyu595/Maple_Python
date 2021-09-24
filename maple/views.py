@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Menu, Application, Chicken, Beef
-from .forms import MenuForm, ChickenForm, BeefForm
+from .models import Menu, Application, Chicken, Beef, Side
+from .forms import MenuForm, ChickenForm, BeefForm, SideForm
 
 # Create your views here.
 def index(request):
@@ -11,8 +11,9 @@ def menu_list(request):
     menu_object = Menu.objects.all()
     chicken_object = Chicken.objects.all()
     beef_object = Beef.objects.all()
-    return render(request, 'maple/menu_list.html', {'beef_object': beef_object, 'chicken_object': chicken_object,
-                                                    'menu_object': menu_object})
+    side_object = Side.objects.all()
+    return render(request, 'maple/menu_list.html', {'side_object': side_object, 'beef_object': beef_object,
+                                                    'chicken_object': chicken_object, 'menu_object': menu_object})
 
 def accept(request):
     if request.method == 'POST':
@@ -28,6 +29,10 @@ def accept(request):
         profile.save()
     return render(request, 'maple/accept.html')
 
+def side_detail(request, side_id):
+    item = Side.objects.get(pk=side_id)
+    return render(request, 'maple/menu_detail.html', {'menu': item})
+
 def menu_detail(request, menu_id):
     item = Menu.objects.get(pk=menu_id)
     return render(request, 'maple/menu_detail.html', {'menu': item})
@@ -39,6 +44,15 @@ def chicken_detail(request, chicken_id):
 def beef_detail(request, beef_id):
     item = Beef.objects.get(pk=beef_id)
     return render(request, 'maple/menu_detail.html', {'menu': item})
+
+def create_side(request):
+    form = SideForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('maple:menu_list')
+
+    return render(request, 'maple/menu-form.html', {'form': form})
 
 def create_item(request):
     form = MenuForm(request.POST or None)
@@ -66,6 +80,16 @@ def create_beef(request):
         return redirect('maple:menu_list')
 
     return render(request, 'maple/menu-form.html', {'form': form})
+
+def update_side(request, id):
+    item = Side.objects.get(id=id)
+    form = SideForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('maple:menu_list')
+
+    return render(request, 'maple/menu-form.html', {'form': form, 'item': item})
 
 def update_item(request, id):
     item = Menu.objects.get(id=id)
